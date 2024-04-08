@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Button, ScrollView, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Button, ScrollView, Dimensions, Image } from 'react-native';
+import WavyHeader from './Component/WavyHeader';
 import { Entypo } from '@expo/vector-icons';
 import * as SQLite from 'expo-sqlite';
 import RNPickerSelect from 'react-native-picker-select';
-import Header from './Header';
+
 
 
 
@@ -143,11 +144,16 @@ const Dashboard = ({ navigation }) => {
     return (
 
         <ScrollView contentContainerStyle={styles.scrollContainer}>
+            <View style={styles.container}>
+                <WavyHeader customStyles={styles.svgCurve} />
+                <View style={styles.headerContainer}>
+                    <Image style={styles.headerImage} source={require('./img/Azilog.png')} />
+                </View>
+            </View>
 
-
-            <Header style={styles.header} />
 
             <RNPickerSelect
+                style={styles.picker}
                 onValueChange={(value) => setSelectedFilter(value)}
                 items={[
                     { label: 'Reminder', value: 'Reminder' },
@@ -184,6 +190,7 @@ const Dashboard = ({ navigation }) => {
             })}
 
             <Button title="Add" className="btn btn-dark" onPress={() => navigation.navigate('FormScreen')} />
+
         </ScrollView>
     );
 };
@@ -204,6 +211,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     card: {
+        marginTop: 60,
         backgroundColor: '#fff',
         borderRadius: 10,
         padding: 20,
@@ -260,8 +268,47 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         maxWidth: 'auto',
     },
-    logoContainer: {
-        alignItems: 'center',
-        marginBottom: 20,
+    headerContainer: {
+
+        marginHorizontal: 10,
+        justifyContent: 'center', // Center the content vertically
+        alignItems: 'center', // Center the content horizontally
+    },
+    svgCurve: {
+        position: 'absolute',
+        width: Dimensions.get('window').width,
+    },
+    headerImage: {
+        width: 125,
+        height: 125,
+        resizeMode: 'contain',
+    },
+
+    picker: {
+        inputIOS: {
+            fontSize: 16,
+            paddingVertical: 12,
+            paddingHorizontal: 10,
+            borderWidth: 1,
+            borderColor: '#FFD4CA',
+            borderRadius: 30,
+            backgroundColor: 'transparent',
+            color: 'white',
+            paddingRight: 30,
+            width: 95,
+            overflow: 'hidden',
+
+        },
+        inputAndroid: {
+            fontSize: 16,
+            paddingHorizontal: 10,
+            paddingVertical: 8,
+            borderWidth: 0.5,
+            borderColor: 'transparent',
+            borderRadius: 30,
+            backgroundColor: '#C5A6D6',
+            color: 'black',
+            paddingRight: 30,
+        },
     },
 });

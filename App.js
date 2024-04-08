@@ -6,6 +6,8 @@ import Note from './Note';
 import FormScreen from './FormScreen';
 import Header from './Header';
 import EditMode from './EditMode';
+import ScreenOne from './Waves';
+
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -21,6 +23,8 @@ export default function App() {
         <Stack.Screen name="FormScreen" component={FormScreen} />
         <Stack.Screen name="Header" component={Header} />
         <Stack.Screen name="EditMode" component={EditMode} />
+        <Stack.Screen name="ScreenOne" component={ScreenOne} />
+
 
       </Stack.Navigator>
     </NavigationContainer>
