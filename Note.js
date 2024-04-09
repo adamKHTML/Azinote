@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Button, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Button, KeyboardAvoidingView, Dimensions, ScrollView } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import * as SQLite from 'expo-sqlite';
 import EditMode from './EditMode';
-
+import WavyHeader from './Component/WavyHeader';
 
 
 const Note = ({ navigation, route }) => {
@@ -49,6 +49,7 @@ const Note = ({ navigation, route }) => {
     };
 
     const priorityLabel = formatPriorityLabel(note.priority);
+    // const priorityStyle = formatPriorityStyle(note.priority);
 
 
     const handleEditNote = () => {
@@ -69,38 +70,69 @@ const Note = ({ navigation, route }) => {
     };
 
 
+    const formatPriorityStyle = (value) => {
+        switch (value) {
+            case '0':
+                return styles.priorityReminder;
+            case '1':
+                return styles.priorityStandard;
+            case '2':
+                return styles.priorityUrgent;
+            default:
+                return {};
+        }
+    };
 
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+            <View style={styles.container}>
+                <WavyHeader customStyles={styles.svgCurve} />
+                <View style={styles.headerContainer}>
+                </View>
+
+            </View>
             <KeyboardAvoidingView behavior='padding'>
                 <View style={styles.noteContainer}>
                     <Text style={styles.noteTitle}>{note.title}</Text>
                     <Text style={styles.cardDate}>Date: {formattedDate}</Text>
-                    <Text style={styles.cardPriority}>Priority: {formatPriorityLabel(note.priority)}</Text>
+                    <View style={styles.cardPriorityContainer}>
+                        <Text style={styles.cardPriorityLabel}>Priority :</Text>
+                        <Text style={[styles.cardPriority, formatPriorityStyle(note.priority)]}>{priorityLabel}</Text>
+                    </View>
                     <Text style={styles.noteContent}>{note.content}</Text>
                     <TouchableOpacity style={styles.editButton} onPress={handleEditNote}>
                         <Text style={styles.editButtonText}>Modifier</Text>
                     </TouchableOpacity>
                 </View>
-                {isEditMode && (
-                    <EditMode
+                <View>
+                    {isEditMode && (
+                        <EditMode
 
-                        note={note}
-                        onCancel={handleCancelEdit}
-                        onSave={handleSaveNote}
-                        navigation={navigation}
-                    />
-                )}
+                            note={note}
+                            onCancel={handleCancelEdit}
+                            onSave={handleSaveNote}
+                            navigation={navigation}
+                        />
+                    )}
+                </View>
             </KeyboardAvoidingView>
-        </View>
+        </ScrollView>
     );
 };
 
 export default Note;
 
 const styles = StyleSheet.create({
+    scrollContainer: {
+        flex: 1,
+        flexGrow: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
     container: {
         flex: 1,
+        paddingTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -129,14 +161,74 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
     },
+
+    cardPriorityContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 10,
+        borderRadius: 5,
+        overflow: 'hidden',
+    },
     cardPriority: {
         fontSize: 14,
         color: 'gray',
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        borderRadius: 5,
+        overflow: 'hidden',
+    },
+    cardPriorityLabel: {
+        fontSize: 16,
+        color: '#808080',
         marginBottom: 10,
+    },
+    priorityReminder: {
+        backgroundColor: '#f0f0f0',
+        color: '#888383',
+        borderRadius: 5,
+        padding: 5,
+        alignSelf: 'flex-start',
+        maxWidth: 'auto',
+        borderRadius: 5,
+
+    },
+    priorityStandard: {
+        backgroundColor: '#ffd166',
+        color: '#664c10',
+        alignSelf: 'flex-start',
+        maxWidth: 'auto',
+        padding: 5,
+        borderRadius: 5,
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+    },
+    priorityUrgent: {
+        backgroundColor: '#F45B69',
+        color: '#314031',
+        padding: 5,
+        paddingHorizontal: 10,
+        alignSelf: 'flex-start',
+        maxWidth: 'auto',
+        borderRadius: 5,
+        paddingVertical: 5,
+
     },
     cardDate: {
         fontSize: 14,
         color: 'gray',
         marginBottom: 10,
     },
+
+    headerContainer: {
+
+        marginHorizontal: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    svgCurve: {
+        position: 'absolute',
+        width: Dimensions.get('window').width,
+    },
+
 });

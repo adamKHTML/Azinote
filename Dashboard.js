@@ -154,6 +154,7 @@ const Dashboard = ({ navigation }) => {
 
             <RNPickerSelect
                 style={styles.picker}
+
                 onValueChange={(value) => setSelectedFilter(value)}
                 items={[
                     { label: 'Reminder', value: 'Reminder' },
@@ -189,7 +190,11 @@ const Dashboard = ({ navigation }) => {
                 );
             })}
 
-            <Button title="Add" className="btn btn-dark" onPress={() => navigation.navigate('FormScreen')} />
+            <TouchableOpacity
+                style={styles.addButton}
+                onPress={() => navigation.navigate('FormScreen')}>
+                <Text style={styles.addButtonText}>Add</Text>
+            </TouchableOpacity>
 
         </ScrollView>
     );
@@ -198,17 +203,20 @@ const Dashboard = ({ navigation }) => {
 export default Dashboard;
 
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
         paddingTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
+
     },
 
     scrollContainer: {
         flexGrow: 1,
         alignItems: 'center',
         justifyContent: 'center',
+
     },
     card: {
         marginTop: 60,
@@ -227,52 +235,74 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 10,
     },
+    cardPriorityContainer: {
+        marginBottom: 10,
+        borderRadius: 5,
+        overflow: 'hidden',
+    },
     cardPriority: {
         fontSize: 14,
         color: 'gray',
-        marginBottom: 10,
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        borderRadius: 5,
+        overflow: 'hidden',
     },
     buttonsContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     button: {
-        backgroundColor: '#5AB1BB',
+        backgroundColor: '#ffd4ca',
         borderRadius: 5,
         padding: 10,
+    },
+    cardDate: {
+        fontSize: 16,
+        marginBottom: 10,
+        color: '#808080',
+    },
+    cardPriorityLabel: {
+        fontSize: 16,
+        color: '#808080',
+        marginBottom: 10,
     },
     priorityReminder: {
         backgroundColor: '#f0f0f0',
         color: '#888383',
         borderRadius: 5,
         padding: 5,
-        paddingHorizontal: 10,
         alignSelf: 'flex-start',
         maxWidth: 'auto',
+        borderRadius: 5,
+
     },
     priorityStandard: {
         backgroundColor: '#ffd166',
         color: '#664c10',
-        borderRadius: 5,
-        padding: 5,
-        paddingHorizontal: 10,
         alignSelf: 'flex-start',
         maxWidth: 'auto',
+        padding: 5,
+        borderRadius: 5,
+        paddingVertical: 5,
+        paddingHorizontal: 10,
     },
     priorityUrgent: {
         backgroundColor: '#F45B69',
         color: '#314031',
-        borderRadius: 5,
         padding: 5,
         paddingHorizontal: 10,
         alignSelf: 'flex-start',
         maxWidth: 'auto',
+        borderRadius: 5,
+        paddingVertical: 5,
+
     },
     headerContainer: {
 
         marginHorizontal: 10,
-        justifyContent: 'center', // Center the content vertically
-        alignItems: 'center', // Center the content horizontally
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     svgCurve: {
         position: 'absolute',
@@ -290,10 +320,10 @@ const styles = StyleSheet.create({
             paddingVertical: 12,
             paddingHorizontal: 10,
             borderWidth: 1,
-            borderColor: '#FFD4CA',
+            borderColor: '#F45B69',
             borderRadius: 30,
-            backgroundColor: 'transparent',
-            color: 'white',
+            backgroundColor: '#ffd4ca',
+            color: '#F45B69',
             paddingRight: 30,
             width: 95,
             overflow: 'hidden',
@@ -301,14 +331,40 @@ const styles = StyleSheet.create({
         },
         inputAndroid: {
             fontSize: 16,
+            paddingVertical: 12,
             paddingHorizontal: 10,
-            paddingVertical: 8,
-            borderWidth: 0.5,
-            borderColor: 'transparent',
+            borderWidth: 1,
+            borderColor: '#F45B69',
             borderRadius: 30,
-            backgroundColor: '#C5A6D6',
-            color: 'black',
+            backgroundColor: '#ffd4ca',
+            color: '#F45B69',
             paddingRight: 30,
+            overflow: 'hidden',
+            width: 95,
         },
     },
+
+    addButton: {
+        backgroundColor: '#114b5f',
+        borderRadius: 11,
+        width: 150,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        shadowColor: '#114b5f',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
+        elevation: 5,
+        opacity: 1,
+    },
+    addButtonText: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 16,
+    },
+
 });
+

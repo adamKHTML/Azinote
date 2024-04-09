@@ -55,6 +55,7 @@ const EditMode = ({ note, onSave, onCancel, navigation, route }) => {
 
     return (
         <View style={styles.container}>
+
             <TextInput
                 style={styles.input}
                 value={editedNote.title}

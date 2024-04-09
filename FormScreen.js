@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, StyleSheet, TextInput, ScrollView, TouchableOpacity, Text, Platform, DatePickerAndroid } from 'react-native';
+import { View, Button, StyleSheet, TextInput, TouchableOpacity, Text, Platform, DatePickerAndroid, Dimensions, ScrollView } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import * as SQLite from 'expo-sqlite';
 import RNPickerSelect from 'react-native-picker-select';
+import WavyHeader from './Component/WavyHeader';
 
 
 const db = SQLite.openDatabase('notes.db');
@@ -92,7 +93,15 @@ const FormScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.container}>
+        <WavyHeader customStyles={styles.svgCurve} />
+        <View style={styles.headerContainer}>
+        </View>
+      </View>
+
+
+
       <TextInput
         style={styles.input}
         placeholder="Title"
@@ -121,7 +130,7 @@ const FormScreen = () => {
         ]}
       />
       <Button title="Save" onPress={saveNote} />
-      <ScrollView>
+      <View>
         {names.map((note, index) => (
           <View key={index} style={row.container}>
             <Text style={row.text}>{note.title}</Text>
@@ -130,8 +139,8 @@ const FormScreen = () => {
             </TouchableOpacity>
           </View>
         ))}
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -140,9 +149,19 @@ export default FormScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    paddingTop: 20,
     alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+  scrollContainer: {
+    flex: 1,
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 20,
+
+
   },
   input: {
     borderWidth: 1,
@@ -205,6 +224,18 @@ const row = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
   },
+
+  headerContainer: {
+
+    marginHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  svgCurve: {
+    position: 'absolute',
+    width: Dimensions.get('window').width,
+  },
+
 });
 
 const pickerSelectStyles = StyleSheet.create({
