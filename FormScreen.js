@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Button, StyleSheet, TextInput, TouchableOpacity, Text, Platform, DatePickerAndroid, Dimensions, ScrollView } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, AntDesign } from '@expo/vector-icons';
 import * as SQLite from 'expo-sqlite';
 import RNPickerSelect from 'react-native-picker-select';
 import WavyHeader from './Component/WavyHeader';
@@ -94,13 +94,14 @@ const FormScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.container}>
+
+      <View style={styles.section}>
         <WavyHeader customStyles={styles.svgCurve} />
+
         <View style={styles.headerContainer}>
+          <AntDesign name="form" size={45} color="white" />
         </View>
       </View>
-
-
 
       <TextInput
         style={styles.input}
@@ -120,7 +121,7 @@ const FormScreen = () => {
         onChangeText={text => setContent(text)}
       />
       <RNPickerSelect
-        style={pickerSelectStyles}
+        style={styles.picker}
         value={priority}
         onValueChange={(value) => setPriority(value)}
         items={[
@@ -129,7 +130,9 @@ const FormScreen = () => {
           { label: 'Urgent', value: '2' },
         ]}
       />
-      <Button title="Save" onPress={saveNote} />
+      <TouchableOpacity style={row.saveButton} onPress={saveNote}>
+        <Text style={row.addButtonText}>Save</ Text>
+      </TouchableOpacity>
       <View>
         {names.map((note, index) => (
           <View key={index} style={row.container}>
@@ -142,6 +145,7 @@ const FormScreen = () => {
       </View>
     </ScrollView>
   );
+
 };
 
 export default FormScreen;
@@ -149,17 +153,24 @@ export default FormScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
+    backgroundColor: '#F45B69',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: "#ffd4ca",
+  },
+  section: {
+    flex: 1,
+
     alignItems: 'center',
     justifyContent: 'center',
 
   },
   scrollContainer: {
-    flex: 1,
+
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+
 
 
   },
@@ -170,7 +181,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     width: '100%',
-    fontFamily: 'Montserrat_400Regular'
+    fontFamily: 'Montserrat_400Regular',
+    marginTop: Dimensions.get('window').height * 0.3,
 
   },
   textarea: {
@@ -185,13 +197,51 @@ const styles = StyleSheet.create({
 
   },
   dateInput: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+
+    backgroundColor: '#456990',
+    color: '#fff',
+    borderRadius: 7,
     padding: 10,
     marginBottom: 10,
     width: '100%',
     fontFamily: 'Montserrat_400Regular',
+    overflow: 'hidden',
+
+  },
+  headerContainer: {
+
+    position: 'absolute',
+    paddingTop: Dimensions.get('window').height * 0.2,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+  svgCurve: {
+    height: 89,
+    position: 'absolute',
+    width: Dimensions.get('window').width,
+  },
+  picker: {
+    inputIOS: {
+      borderWidth: 1,
+      borderColor: '#ccc',
+      borderRadius: 5,
+      padding: 10,
+      marginBottom: 10,
+      width: '100%',
+      fontFamily: 'Montserrat_400Regular'
+
+    },
+    inputAndroid: {
+      borderWidth: 1,
+      borderColor: '#ccc',
+      borderRadius: 5,
+      padding: 10,
+      marginBottom: 10,
+      width: '100%',
+      fontFamily: 'Montserrat_400Regular'
+
+    },
 
   },
 });
@@ -231,46 +281,35 @@ const row = StyleSheet.create({
 
   },
   button: {
-    backgroundColor: '#5AB1BB',
+    backgroundColor: '#F45B69',
     borderRadius: 5,
-    padding: 5,
-
-
-
+    padding: 10,
   },
 
-  headerContainer: {
+  saveButton: {
+    backgroundColor: '#114b5f',
+    borderRadius: 11,
+    width: 150,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    shadowColor: '#114b5f',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 5,
+    opacity: 1,
+  },
+  addButtonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 16,
+    fontFamily: 'Montserrat_400Regular'
+  },
 
-    marginHorizontal: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  svgCurve: {
-    position: 'absolute',
-    width: Dimensions.get('window').width,
-  },
+
 
 });
 
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-    width: '100%',
-    fontFamily: 'Montserrat_400Regular'
-
-  },
-  inputAndroid: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-    width: '100%',
-    fontFamily: 'Montserrat_400Regular'
-
-  },
-});

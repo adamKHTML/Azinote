@@ -156,6 +156,10 @@ const Dashboard = ({ navigation }) => {
             </View>
 
 
+            <View style={styles.section}>
+                <Text style={{ fontFamily: 'Montserrat_400Regular', fontSize: '30' }}>Welcome to Azinotes.{"\n"}Create your notes by clicking the 'Add' button.</Text>
+            </View>
+
             <RNPickerSelect
                 style={styles.picker}
 
@@ -186,7 +190,7 @@ const Dashboard = ({ navigation }) => {
                             <TouchableOpacity style={styles.button}>
                                 <Entypo name='cog' size={23} color='#fff' onPress={() => navigation.navigate('Note', { note: note })} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.button} onPress={() => deleteNote(note.id)}>
+                            <TouchableOpacity style={styles.buttonDelete} onPress={() => deleteNote(note.id)}>
                                 <Entypo name='circle-with-cross' size={23} color='#fff' />
                             </TouchableOpacity>
                         </View>
@@ -225,6 +229,14 @@ const styles = StyleSheet.create({
 
 
     },
+    section: {
+        marginTop: 60,
+        padding: 20,
+        marginVertical: 10,
+        width: '80%',
+
+
+    },
     card: {
         marginTop: 60,
         backgroundColor: '#fff',
@@ -232,6 +244,7 @@ const styles = StyleSheet.create({
         padding: 20,
         marginVertical: 10,
         width: '80%',
+
 
     },
     cardTitle: {
@@ -265,6 +278,11 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#ffd4ca',
+        borderRadius: 5,
+        padding: 10,
+    },
+    buttonDelete: {
+        backgroundColor: '#F45B69',
         borderRadius: 5,
         padding: 10,
     },

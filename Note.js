@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Button, KeyboardAvoidingView, Dimensions, ScrollView } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
 import * as SQLite from 'expo-sqlite';
 import EditMode from './EditMode';
 import WavyHeader from './Component/WavyHeader';
@@ -84,14 +84,16 @@ const Note = ({ navigation, route }) => {
     };
 
     return (
+
         <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={styles.container}>
                 <WavyHeader customStyles={styles.svgCurve} />
+
                 <View style={styles.headerContainer}>
+
+                    <Fontisto style={styles.headerImage} name="onenote" size={35} color="white" />
                 </View>
 
-            </View>
-            <KeyboardAvoidingView behavior='padding'>
                 <View style={styles.noteContainer}>
                     <Text style={styles.noteTitle}>{note.title}</Text>
                     <Text style={styles.cardDate}>Date: {formattedDate}</Text>
@@ -104,18 +106,17 @@ const Note = ({ navigation, route }) => {
                         <Text style={styles.editButtonText}>Modifier</Text>
                     </TouchableOpacity>
                 </View>
-                <View>
-                    {isEditMode && (
-                        <EditMode
+                {isEditMode && (
+                    <EditMode
+                        note={note}
+                        onCancel={handleCancelEdit}
+                        onSave={handleSaveNote}
+                        navigation={navigation}
+                    />
+                )}
 
-                            note={note}
-                            onCancel={handleCancelEdit}
-                            onSave={handleSaveNote}
-                            navigation={navigation}
-                        />
-                    )}
-                </View>
-            </KeyboardAvoidingView>
+
+            </View>
         </ScrollView>
     );
 };
@@ -124,17 +125,16 @@ export default Note;
 
 const styles = StyleSheet.create({
     scrollContainer: {
-        flex: 1,
-        flexGrow: 1,
-        alignItems: 'center',
+
         justifyContent: 'center',
+
 
     },
     container: {
         flex: 1,
-        paddingTop: 20,
+        paddingTop: 0,
         alignItems: 'center',
-        justifyContent: 'center',
+
     },
     noteContainer: {
         backgroundColor: '#fff',
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
         padding: 20,
         marginBottom: 20,
         width: '80%',
+        marginTop: Dimensions.get('window').height * 0.3,
 
     },
     noteTitle: {
@@ -235,10 +236,14 @@ const styles = StyleSheet.create({
 
     headerContainer: {
 
-        marginHorizontal: 10,
+        position: 'absolute',
+        paddingTop: '40%',
         justifyContent: 'center',
         alignItems: 'center',
+
+
     },
+
     svgCurve: {
         position: 'absolute',
         width: Dimensions.get('window').width,
