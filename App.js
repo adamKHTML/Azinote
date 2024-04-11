@@ -6,10 +6,17 @@ import Note from './Note';
 import FormScreen from './FormScreen';
 import EditMode from './EditMode';
 import ScreenOne from './Waves';
+import { useCustomFonts } from './Font';
 
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+
+  const fontsLoaded = useCustomFonts();
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <NavigationContainer>

@@ -170,6 +170,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     width: '100%',
+    fontFamily: 'Montserrat_400Regular'
+
   },
   textarea: {
     borderWidth: 1,
@@ -179,6 +181,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: '100%',
     height: 150,
+    fontFamily: 'Montserrat_400Regular'
+
   },
   dateInput: {
     borderWidth: 1,
@@ -187,6 +191,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     width: '100%',
+    fontFamily: 'Montserrat_400Regular',
+
   },
 });
 
@@ -203,6 +209,8 @@ const loadingStyles = StyleSheet.create({
     marginTop: "1em",
     fontSize: 24,
     fontWeight: "800",
+    fontFamily: 'Montserrat_400Regular'
+
   }
 });
 
@@ -215,14 +223,20 @@ const row = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+
   },
   text: {
     fontSize: 18,
+    fontFamily: 'Montserrat_400Regular'
+
   },
   button: {
     backgroundColor: '#5AB1BB',
     borderRadius: 5,
     padding: 5,
+
+
+
   },
 
   headerContainer: {
@@ -246,6 +260,8 @@ const pickerSelectStyles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     width: '100%',
+    fontFamily: 'Montserrat_400Regular'
+
   },
   inputAndroid: {
     borderWidth: 1,
@@ -254,5 +270,7 @@ const pickerSelectStyles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     width: '100%',
+    fontFamily: 'Montserrat_400Regular'
+
   },
 });

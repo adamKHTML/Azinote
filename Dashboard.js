@@ -10,6 +10,7 @@ import RNPickerSelect from 'react-native-picker-select';
 
 const db = SQLite.openDatabase('notes.db');
 
+
 const Dashboard = ({ navigation }) => {
     const [notes, setNotes] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -139,6 +140,9 @@ const Dashboard = ({ navigation }) => {
         );
     }
 
+
+
+
     const filteredNotes = filterNotes(notes, selectedFilter);
 
     return (
@@ -196,6 +200,7 @@ const Dashboard = ({ navigation }) => {
                 <Text style={styles.addButtonText}>Add</Text>
             </TouchableOpacity>
 
+
         </ScrollView>
     );
 };
@@ -210,12 +215,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
 
+
     },
 
     scrollContainer: {
         flexGrow: 1,
         alignItems: 'center',
         justifyContent: 'center',
+
 
     },
     card: {
@@ -225,15 +232,18 @@ const styles = StyleSheet.create({
         padding: 20,
         marginVertical: 10,
         width: '80%',
+
     },
     cardTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 10,
+        fontFamily: 'Montserrat_400Regular'
     },
     cardContent: {
         fontSize: 16,
         marginBottom: 10,
+        fontFamily: 'Montserrat_400Regular'
     },
     cardPriorityContainer: {
         marginBottom: 10,
@@ -247,6 +257,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius: 5,
         overflow: 'hidden',
+        fontFamily: 'Montserrat_400Regular'
     },
     buttonsContainer: {
         flexDirection: 'row',
@@ -261,11 +272,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 10,
         color: '#808080',
+        fontFamily: 'Montserrat_400Regular'
     },
     cardPriorityLabel: {
         fontSize: 16,
         color: '#808080',
         marginBottom: 10,
+        fontFamily: 'Montserrat_400Regular'
     },
     priorityReminder: {
         backgroundColor: '#f0f0f0',
@@ -325,8 +338,9 @@ const styles = StyleSheet.create({
             backgroundColor: '#ffd4ca',
             color: '#F45B69',
             paddingRight: 30,
-            width: 95,
+            width: 125,
             overflow: 'hidden',
+            fontFamily: 'Montserrat_400Regular'
 
         },
         inputAndroid: {
@@ -340,7 +354,8 @@ const styles = StyleSheet.create({
             color: '#F45B69',
             paddingRight: 30,
             overflow: 'hidden',
-            width: 95,
+            width: 115,
+            fontFamily: 'Montserrat_400Regular'
         },
     },
 
@@ -364,6 +379,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontSize: 16,
+        fontFamily: 'Montserrat_400Regular'
     },
 
 });

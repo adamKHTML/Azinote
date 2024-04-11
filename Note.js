@@ -29,7 +29,7 @@ const Note = ({ navigation, route }) => {
         const month = monthNames[monthIndex];
         const year = date.getFullYear();
 
-        return `${time} ${day} ${month} ${year}`;
+        return `${time} - ${day} ${month} ${year}`;
     };
 
 
@@ -142,14 +142,19 @@ const styles = StyleSheet.create({
         padding: 20,
         marginBottom: 20,
         width: '80%',
+
     },
     noteTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 10,
+        fontFamily: 'Montserrat_400Regular'
+
     },
     noteContent: {
         fontSize: 16,
+        fontFamily: 'Montserrat_400Regular'
+
     },
     editButton: {
         backgroundColor: '#5AB1BB',
@@ -160,6 +165,8 @@ const styles = StyleSheet.create({
     editButtonText: {
         color: '#fff',
         fontSize: 16,
+        fontFamily: 'Montserrat_400Regular'
+
     },
 
     cardPriorityContainer: {
@@ -177,11 +184,15 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius: 5,
         overflow: 'hidden',
+        fontFamily: 'Montserrat_400Regular'
+
     },
     cardPriorityLabel: {
         fontSize: 16,
         color: '#808080',
         marginBottom: 10,
+        fontFamily: 'Montserrat_400Regular'
+
     },
     priorityReminder: {
         backgroundColor: '#f0f0f0',
@@ -218,6 +229,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: 'gray',
         marginBottom: 10,
+        fontFamily: 'Montserrat_400Regular'
+
     },
 
     headerContainer: {

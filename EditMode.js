@@ -100,6 +100,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         marginBottom: 10,
+        fontFamily: 'Montserrat_400Regular'
+
     },
     buttonsContainer: {
         flexDirection: 'row',
@@ -116,6 +118,8 @@ const pickerSelectStyles = StyleSheet.create({
         borderRadius: 4,
         color: 'black',
         paddingRight: 30,
+        fontFamily: 'Montserrat_400Regular'
+
     },
     inputAndroid: {
         fontSize: 16,
@@ -126,6 +130,8 @@ const pickerSelectStyles = StyleSheet.create({
         borderRadius: 8,
         color: 'black',
         paddingRight: 30,
+        fontFamily: 'Montserrat_400Regular'
+
     },
 });
 
