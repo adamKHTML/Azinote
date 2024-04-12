@@ -4,9 +4,11 @@ import WavyHeader from './Component/WavyHeader';
 import { Entypo } from '@expo/vector-icons';
 import * as SQLite from 'expo-sqlite';
 import RNPickerSelect from 'react-native-picker-select';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import DarkMode from './Component/DarkMode';
 
 
-
+const DARK_MODE_KEY = 'darkMode';
 
 
 const db = SQLite.openDatabase('notes.db');
@@ -16,6 +18,7 @@ const Dashboard = ({ navigation }) => {
     const [notes, setNotes] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedFilter, setSelectedFilter] = useState(null);
+    const [darkMode, setDarkMode] = useState(false);
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
@@ -26,6 +29,17 @@ const Dashboard = ({ navigation }) => {
 
         return unsubscribe;
     }, [navigation]);
+
+    useEffect(() => {
+        const loadDarkMode = async () => {
+            const storedDarkMode = await AsyncStorage.getItem(DARK_MODE_KEY);
+            if (storedDarkMode) {
+                setDarkMode(JSON.parse(storedDarkMode));
+            }
+        };
+        loadDarkMode();
+    }, []);
+
 
     const showNotes = () => {
         db.transaction(tx => {
@@ -141,24 +155,31 @@ const Dashboard = ({ navigation }) => {
         );
     }
 
-
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+        AsyncStorage.setItem(DARK_MODE_KEY, JSON.stringify(!darkMode));
+    };
 
 
     const filteredNotes = filterNotes(notes, selectedFilter);
 
     return (
 
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <ScrollView contentContainerStyle={darkMode ? styles.darkScrollContainer : styles.scrollContainer}>
             <View style={styles.container}>
                 <WavyHeader customStyles={styles.svgCurve} />
                 <View style={styles.headerContainer}>
                     <Image style={styles.headerImage} source={require('./img/Azilog.png')} />
                 </View>
             </View>
+            <View style={styles.icon}>
 
-
+                <DarkMode onChange={toggleDarkMode} iconColor={darkMode ? '#FFD700' : '#fff'} />
+            </View>
             <View style={styles.section}>
-                <Text style={{ fontFamily: 'Montserrat_400Regular', fontSize: 30 }}>Welcome to Azinotes.{"\n"}Create your notes by clicking the 'Add' button.</Text>
+                <Text style={{ fontFamily: 'Montserrat_400Regular', fontSize: 30, color: darkMode ? '#fff' : '#000' }}>
+                    Welcome to Azinotes.{"\n"}Create your notes by clicking the 'Add' button.
+                </Text>
             </View>
 
             <RNPickerSelect
@@ -179,12 +200,12 @@ const Dashboard = ({ navigation }) => {
                 const priorityStyle = formatPriorityStyle(note.priority);
 
                 return (
-                    <View key={index} style={styles.card}>
-                        <Text style={styles.cardTitle}>{note.title}</Text>
-                        <Text style={styles.cardDate}>{formattedDate}</Text>
-                        <Text style={styles.cardContent}>{truncateText(note.content, 100)}</Text>
+                    <View key={index} style={darkMode ? styles.darkCard : styles.card}>
+                        <Text style={darkMode ? styles.darkTitle : styles.cardTitle}>{note.title}</Text>
+                        <Text style={darkMode ? styles.darkDate : styles.cardDate}>{formattedDate}</Text>
+                        <Text style={darkMode ? styles.darkText : styles.cardContent}>{truncateText(note.content, 100)}</Text>
                         <View style={styles.cardPriorityContainer}>
-                            <Text style={styles.cardPriorityLabel}>Priority :</Text>
+                            <Text style={darkMode ? styles.darkLabel : styles.cardPriorityLabel}>Priority :</Text>
                             <Text style={[styles.cardPriority, formatPriorityStyle(note.priority)]}>{priorityLabel}</Text>
                         </View>
                         <View style={styles.buttonsContainer}>
@@ -221,6 +242,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
 
 
+    },
+    icon: {
+
+        marginLeft: 270
     },
 
     scrollContainer: {
@@ -400,6 +425,56 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Montserrat_400Regular'
     },
+
+    //Dark Mode 
+    darkScrollContainer: {
+        flexGrow: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#2E353E',
+
+    },
+    darkCard: {
+        marginTop: 60,
+        backgroundColor: '#49596F',
+        color: '#fff',
+        borderRadius: 10,
+        padding: 20,
+        marginVertical: 10,
+        width: '80%',
+
+    },
+
+    darkTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        fontFamily: 'Montserrat_400Regular',
+        color: '#fff'
+    },
+
+    darkText: {
+        fontSize: 16,
+        marginBottom: 10,
+        fontFamily: 'Montserrat_400Regular',
+        color: '#fff'
+
+    },
+
+    darkDate: {
+        fontSize: 16,
+        marginBottom: 10,
+        color: '#C6C6C6',
+        fontFamily: 'Montserrat_400Regular'
+
+    },
+
+    darkLabel: {
+        fontSize: 16,
+        color: '#C6C6C6',
+        marginBottom: 10,
+        fontFamily: 'Montserrat_400Regular'
+    }
 
 });
 

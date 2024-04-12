@@ -6,6 +6,9 @@ import RNPickerSelect from 'react-native-picker-select';
 import WavyHeader from './Component/WavyHeader';
 
 
+
+
+
 const db = SQLite.openDatabase('notes.db');
 
 const FormScreen = () => {
@@ -31,8 +34,6 @@ const FormScreen = () => {
 
     setIsLoading(false);
   }, []);
-
-
 
 
   const saveNote = () => {
@@ -92,8 +93,10 @@ const FormScreen = () => {
     );
   }
 
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
+
 
       <View style={styles.section}>
         <WavyHeader customStyles={styles.svgCurve} />
@@ -101,7 +104,10 @@ const FormScreen = () => {
         <View style={styles.headerContainer}>
           <AntDesign name="form" size={45} color="white" />
         </View>
+
       </View>
+
+
 
       <TextInput
         style={styles.input}
@@ -109,6 +115,7 @@ const FormScreen = () => {
         value={title}
         onChangeText={text => setTitle(text)}
       />
+
       <TouchableOpacity onPress={openDatePicker}>
         <Text style={styles.dateInput}>{date.toDateString()}</Text>
       </TouchableOpacity>
@@ -308,7 +315,6 @@ const row = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Montserrat_400Regular'
   },
-
 
 
 });

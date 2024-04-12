@@ -15,7 +15,7 @@ const DarkMode = ({ onChange, iconColor }) => {
 
     return (
         <TouchableOpacity onPress={toggleDarkMode}>
-            <FontAwesome5 name={isDarkMode ? "moon" : "sun"} size={24} color={iconColor} />
+            <FontAwesome5 name={isDarkMode ? "sun" : "moon"} size={24} color={iconColor} />
         </TouchableOpacity>
     );
 };
