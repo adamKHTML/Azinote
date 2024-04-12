@@ -5,7 +5,7 @@ import Dashboard from './Dashboard';
 import Note from './Note';
 import FormScreen from './FormScreen';
 import EditMode from './EditMode';
-import ScreenOne from './Waves';
+
 import { useCustomFonts } from './Font';
 
 
@@ -29,7 +29,7 @@ export default function App() {
         <Stack.Screen name="FormScreen" component={FormScreen} />
 
         <Stack.Screen name="EditMode" component={EditMode} />
-        <Stack.Screen name="ScreenOne" component={ScreenOne} />
+
 
 
       </Stack.Navigator>

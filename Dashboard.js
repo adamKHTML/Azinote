@@ -8,6 +8,7 @@ import RNPickerSelect from 'react-native-picker-select';
 
 
 
+
 const db = SQLite.openDatabase('notes.db');
 
 
@@ -157,7 +158,7 @@ const Dashboard = ({ navigation }) => {
 
 
             <View style={styles.section}>
-                <Text style={{ fontFamily: 'Montserrat_400Regular', fontSize: '30' }}>Welcome to Azinotes.{"\n"}Create your notes by clicking the 'Add' button.</Text>
+                <Text style={{ fontFamily: 'Montserrat_400Regular', fontSize: 30 }}>Welcome to Azinotes.{"\n"}Create your notes by clicking the 'Add' button.</Text>
             </View>
 
             <RNPickerSelect
